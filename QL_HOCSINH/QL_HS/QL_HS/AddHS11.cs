@@ -17,7 +17,7 @@ namespace QL_HS
         {
             InitializeComponent();
         }
-        string link = @"Data Source=ANHQUOC-PC\ANHQUOC;User ID=anhquoc;Password=123;Initial Catalog=QL_HOCSINH";
+        string link = @"Data Source=DESKTOP-LVM1F93;User ID=sa;Password=123456;Initial Catalog=QL_HOCSINH";
 
         private void LoadCB()
         {
