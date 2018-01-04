@@ -65,7 +65,7 @@ namespace QL_HS
         //===========================================================================
 
         //================Thực hiện chức năng cho tab tiếp nhận sinh viên=============
-         string link = @"Data Source=DESKTOP-LVM1F93;User ID=sa;Password=123456;Initial Catalog=QL_HOCSINH";
+        string link = @"Data Source=ANHQUOC-PC\ANHQUOC;User ID=anhquoc;Password=123;Initial Catalog=QL_HOCSINH";
 
         private void KNThemHS()
         {
@@ -104,7 +104,7 @@ namespace QL_HS
             txtEmail.Text = dataGridViewX1.Rows[index].Cells[4].Value.ToString();
             txtDiaChi.Text = dataGridViewX1.Rows[index].Cells[5].Value.ToString();
         }
-        //set dateformat dmy
+
         private void ThemHS()
         {
             try
@@ -116,7 +116,7 @@ namespace QL_HS
                     s = "Nữ";
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string them = "INSERT INTO HOCSINH VALUES('" + txtMS.Text + "',N'" + txtTen.Text + "','" + txtdate.Text + "',N'" + s + "','" + txtEmail.Text + "',N'" + txtDiaChi.Text + "')";
+                string them = "set dateformat dmy INSERT INTO HOCSINH VALUES('" + txtMS.Text + "',N'" + txtTen.Text + "','" + txtdate.Text + "',N'" + s + "','" + txtEmail.Text + "',N'" + txtDiaChi.Text + "')";
                 SqlCommand command = new SqlCommand(them, URL);
                 command.ExecuteNonQuery();
                 KNThemHS();
@@ -1099,259 +1099,10 @@ namespace QL_HS
 
         //=============================================================
 
-        //===========Thực hiện chức năng Tab Nhap diem mon hoc ==================
-        private void loadMSSV()
-        {
-            SqlConnection URL = new SqlConnection(link);
-            URL.Open();         
-            string sql2 = "select MAMH from MONHOC";
-            string sql3 = "select MAHS from HOCSINH";                 
-            SqlDataAdapter ad2 = new SqlDataAdapter(sql2, URL);
-            DataTable dt2 = new DataTable();
-            ad2.Fill(dt2);
-            cbndMamon.DataSource = dt2;
-            cbndMamon.ValueMember = "MAMH";
-            SqlDataAdapter ad3 = new SqlDataAdapter(sql3, URL);
-            DataTable dt3 = new DataTable();
-            ad3.Fill(dt3);
-            cbndMahocsinh.DataSource = dt3;
-            cbndMahocsinh.ValueMember = "MAHS";
-            URL.Close();
-        }
-
-        private void loadtabndmh()
-        {
-           
-            SqlConnection sql = new SqlConnection(link);
-            sql.Open();
-            string loadtenn = "select * from HOCSINH where MAHS like '%" + cbndMahocsinh.SelectedValue.ToString() + "%'";
-            SqlCommand commandsql = new SqlCommand(loadtenn, sql);
-            SqlDataReader chim = commandsql.ExecuteReader();
-            if(chim.Read())           
-                txtndHoten.Text = chim["HoTen"].ToString();            
-            sql.Close();  
-        }
-
-        private void loadtabtxtlop()
-        {
-            SqlConnection sql = new SqlConnection(link);
-            sql.Open();
-            string loadten = "select * FROM CTLOP WHERE MAHS LIKE '%" + cbndMahocsinh.SelectedValue.ToString() + "%'";
-            SqlCommand commandsqll = new SqlCommand(loadten, sql);
-            SqlDataReader comm = commandsqll.ExecuteReader();
-            if (comm.Read())
-                txtndLop.Text = comm["MALOP"].ToString();
-            sql.Close();
-        }
-
-        private void loadtablablelop()
-        {
-            SqlConnection sql = new SqlConnection(link);
-            sql.Open();
-            string loadten = "select * from MONHOC where MAMH like '%" + cbndMamon.SelectedValue.ToString() + "%'";
-            SqlCommand commandsqll = new SqlCommand(loadten, sql);
-            SqlDataReader comm = commandsqll.ExecuteReader();
-            if (comm.Read())
-                txtndTenmon.Text = comm["Ten"].ToString();
-            sql.Close();
-        }
-     
-        private void loadData()
-        {
-            try
-            {
-                SqlConnection URL = new SqlConnection(link);
-                URL.Open();             
-                string sql = "select h.MAHS, h.HoTen, d.MAHK, m.MAMH, d.[15P], d.[45P], DTBM = CONVERT(decimal(5,2),D.DTBM) from HOCSINH H, DIEMKIEMTRA D, MONHOC M where h.MAHS = d.MAHS and D.MAMH = m.MAMH";
-                SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
-                SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
-                DataTable table = new DataTable();
-                com.Fill(table);
-                dataGridViewNhapdiem.DataSource = table;
-            }
-            catch
-            {
-                MessageBox.Show("Kết nối không thành công! Vui lòng kết nối lại!");
-            }
-            finally
-            {
-                SqlConnection URL = new SqlConnection(link);
-                URL.Close();
-            }
-        }
-
-        private void cbndMahocsinh_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadtabndmh();
-            loadtabtxtlop();
-        }
-
-        private void cbndMamon_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadtablablelop();
-        }
-        //Viet ham update DTB
-        private void DTB_Update ()
-        {
-            try
-            {
-                SqlConnection URL = new SqlConnection(link);
-                URL.Open();
-                string DTB = "update DIEMKIEMTRA set DTBM = (select (([15P] + [45P]*2)/3))";
-                SqlCommand command = new SqlCommand(DTB, URL);
-                command.ExecuteNonQuery();
-                loadData();
-            }
-            catch
-            {
-                MessageBox.Show("Update điểm không thành công!", "Thông báo lỗi");
-            }
-            finally
-            {
-                SqlConnection URL = new SqlConnection(link);
-                URL.Close();
-            }
-        }
-
-        //Viet ham insert
-        private void btndThem_Click(object sender, EventArgs e)
-        {
-           try
-           {
-                string HK = "";
-                if (rbndHKI.Checked == true)
-                    HK = "HK1";
-                else
-                    HK = "HK2";
-                SqlConnection URL = new SqlConnection(link);
-                URL.Open();
-                string insert = "INSERT INTO DIEMKIEMTRA VALUES('"+cbndMahocsinh.SelectedValue.ToString() +"','" + cbndMamon.SelectedValue.ToString() + "','" + HK + "','" + txtndDiem15.Text + "','" + txtndDiem45.Text + "',0)";
-                SqlCommand command = new SqlCommand(insert, URL);
-                command.ExecuteNonQuery();
-                DTB_Update();
-                loadData();
-           }
-           catch
-           {
-
-                MessageBox.Show("Thêm không thành công", "Thông báo lỗi");
-
-           }
-           finally
-           {
-               SqlConnection URL = new SqlConnection(link);
-               URL.Close();
-           }
-        }
-
-        //Viet ham Edit
-        private void btndSua_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string HK = "";
-                if (rbndHKI.Checked == true)
-                    HK = "HK1";
-                else
-                    HK = "HK2";
-                SqlConnection URL = new SqlConnection(link);
-                URL.Open();
-                string sua = "UPDATE DIEMKIEMTRA SET [15P]='"+txtndDiem15.Text+"', [45P] = '"+txtndDiem45.Text+"' WHERE MAHS='"+cbndMahocsinh.SelectedValue.ToString()+"' and MAMH ='"+cbndMamon.SelectedValue.ToString()+"' and MAHK='"+HK+"'";
-                SqlCommand command = new SqlCommand(sua, URL);
-                command.ExecuteNonQuery();
-                DTB_Update();
-                loadData();
-            }
-            catch
-            {
-                MessageBox.Show("Sửa không thành công!","Thông báo lỗi");
-            }
-            finally
-            {
-                SqlConnection URL = new SqlConnection(link);
-                URL.Close();
-            }
-        }
-
-        //Viet ham DELETE
-        private void btndXoa_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SqlConnection URL = new SqlConnection(link);
-                URL.Open();
-                string HK = "";
-                if (rbndHKI.Checked == true)
-                    HK = "HK1";
-                else
-                    HK = "HK2";
-                string xoa = "DELETE FROM DIEMKIEMTRA WHERE MAHS='"+cbndMahocsinh.SelectedValue.ToString()+"' and MAMH='"+cbndMamon.SelectedValue.ToString()+"' and MAHK='"+HK+"'";
-                SqlCommand command = new SqlCommand(xoa, URL);
-                command.ExecuteNonQuery();
-                loadData();
-            }
-            catch
-            {
-                MessageBox.Show("Xóa không thành công!","Thông báo lỗi");
-            }
-            finally
-            {
-                SqlConnection URL = new SqlConnection(link);
-                URL.Close();
-            }
-        }
-
-        //Viet ham nhap lai
-        private void btndNhaplai_Click(object sender, EventArgs e)
-        {
-            //cbndMahocsinh.SelectedValue = "";       
-            rbndHKI.Checked = true;
-            //cbndMamon.SelectedValue = "";
-            txtndDiem15.Text = "";
-            txtndDiem45.Text = "";
-        }
-
-        //Viet ham push thong tin chi tiet
-        private void dataGridViewNhapdiem_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int index = dataGridViewNhapdiem.CurrentRow.Index;
-            cbndMahocsinh.SelectedValue = dataGridViewNhapdiem.Rows[index].Cells[0].Value.ToString();
-            txtndHoten.Text = dataGridViewNhapdiem.Rows[index].Cells[1].Value.ToString();          
-            if (dataGridViewNhapdiem.Rows[index].Cells[2].Value.ToString().Equals("HK1"))
-                rbndHKI.Checked = true;
-            else
-                rbndHKII.Checked = true;
-            cbndMamon.SelectedValue = dataGridViewNhapdiem.Rows[index].Cells[3].Value.ToString();
-            txtndDiem15.Text = dataGridViewNhapdiem.Rows[index].Cells[4].Value.ToString();
-            txtndDiem45.Text = dataGridViewNhapdiem.Rows[index].Cells[5].Value.ToString();
-        }
-
-        private void txtndDiem15_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtndDiem45_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
-        }
-        private void Nhapdiemmonhoc()
-        {
-            loadData();
-            loadMSSV();
-            loadtabndmh();
-            loadtabndmh();
-            loadtablablelop();
-            loadtabtxtlop();
-            DTB_Update();
-        }
+        //===========Thực hiện chức năng Tab ==================
+       
         //=============================================================
+
         //============MainTheme Load===================
         private void MainTheme_Load(object sender, EventArgs e)
         {
@@ -1365,7 +1116,6 @@ namespace QL_HS
             loadTabDiem();
             loadTabSS();
             loadTabTuoi();
-            Nhapdiemmonhoc();
         }
 
         private void buttonItem2_Click(object sender, EventArgs e)
@@ -1373,6 +1123,5 @@ namespace QL_HS
             Close();
         }
 
-       
     }
 }
