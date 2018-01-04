@@ -1,0 +1,31 @@
+﻿USE [QL_HOCSINH]
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('DD',N'Đạo đức')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('TO',N'Toán')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('TD',N'Thể dục')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('SI',N'Sinh')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('LY',N'Lý')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('HO',N'Hóa')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('VA',N'Văn')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('SU',N'Sử')
+GO
+
+INSERT INTO [dbo].[MONHOC] (MAMH,Ten) VALUES ('DI',N'Địa')
+GO
+
+SELECT * FROM MONHOC

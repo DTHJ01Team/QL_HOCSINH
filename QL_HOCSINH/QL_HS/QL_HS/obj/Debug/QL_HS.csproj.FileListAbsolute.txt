@@ -1,0 +1,12 @@
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\bin\Debug\QL_HS.exe
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\bin\Debug\QL_HS.pdb
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.MainTheme.resources
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.Properties.Resources.resources
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.csproj.GenerateResource.Cache
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.exe
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.pdb
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.AddHS10.resources
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.AddHS11.resources
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.AddHS12.resources
+C:\Users\AnhQuoc\Documents\Visual Studio 2008\Projects\QL_HS\QL_HS\obj\Debug\QL_HS.SLMonHoc.resources
