@@ -59,5 +59,15 @@ namespace QL_HS.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap magnifying_glass_311511_960_720 {
+            get {
+                object obj = ResourceManager.GetObject("magnifying-glass-311511_960_720", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

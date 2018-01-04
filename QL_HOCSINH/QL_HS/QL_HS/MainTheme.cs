@@ -65,7 +65,7 @@ namespace QL_HS
         //===========================================================================
 
         //================Thực hiện chức năng cho tab tiếp nhận sinh viên=============
-        string link = @"Data Source=DESKTOP-GH4LE4S\SQLEXPRESS;User ID=thai;Password=123;Initial Catalog=QL_HOCSINH";
+        string link = @"Data Source=HUYNHMINH-PC\SQLEXPRESS;Initial Catalog=QL_HOCSINH;Persist Security Info=True;User ID=sa;Password=123";
 
         private void KNThemHS()
         {
@@ -1559,6 +1559,134 @@ namespace QL_HS
             loadlop();
         }
         //=============================================================
+        //===========Thực hiện chức năng Tab la bao cao tong ket==================
+        private void loadcbloptk()
+        {
+            SqlConnection URL = new SqlConnection(link);
+            URL.Open();
+            string load = "SELECT * from LOP";
+            SqlCommand commandSql = new SqlCommand(load, URL); // Thực thi câu lệnh SQL
+            SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
+            DataTable t = new DataTable();
+            com.Fill(t);
+            cblop.DataSource = t;
+            cblop.ValueMember = "MALOP";
+            URL.Close();
+        }
+        private void loadcbmontk()
+        {
+            SqlConnection URL = new SqlConnection(link);
+            URL.Open();
+            string load = "SELECT * from MONHOC";
+            SqlCommand commandSql = new SqlCommand(load, URL); // Thực thi câu lệnh SQL
+            SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
+            DataTable t = new DataTable();
+            com.Fill(t);
+            cbmon.DataSource = t;
+            cbmon.ValueMember = "TEN";
+            URL.Close();
+        }
+        private void loadcbmontk1()
+        {
+            SqlConnection URL = new SqlConnection(link);
+            URL.Open();
+
+            string load = "SELECT * from LOP";
+            SqlCommand commandSql = new SqlCommand(load, URL); // Thực thi câu lệnh SQL
+            SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
+            DataTable t = new DataTable();
+            com.Fill(t);
+            cblop1.DataSource = t;
+            cblop1.ValueMember = "MALOP";
+            URL.Close();
+        }
+
+        private void loadBCTKmon()
+        {
+
+            if (rdtkmon.Checked)
+            {
+                try
+                {
+                    SqlConnection URL = new SqlConnection(link);
+                    URL.Open();
+                    string sql = "select L.MALOP, L.SL, \n" +
+                                 "[Dat] = (select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat  and D.MAMH like '%" + cbmon.SelectedValue.ToString() + "%' and C.MALOP like '%" + cblop.SelectedValue.ToString() + "%'),\n" +
+                                 "[TL] = convert(varchar(50),((select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat and D.MAMH like '%" + cbmon.SelectedValue.ToString() + "%' and C.MALOP like '%" + cblop.SelectedValue.ToString() + "%') / convert(float,L.SL)*100)) + '%'\n" +
+                                 "from LOP L, DIEMKIEMTRA D, CTLOP C\n" +
+                                 "where L.MALOP = C.MALOP and C.MAHS = D.MAHS and C.MALOP like '%" +
+                                 cblop.SelectedValue.ToString() +
+                                 "%'\n" + "group by L.MALOP, L.SL";
+                    SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
+                    SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
+                    DataTable table = new DataTable();
+                    com.Fill(table);
+                    DataGV.DataSource = table;
+                }
+                catch
+                {
+                    MessageBox.Show("Hiện không có dữ liệu!!!", "Thông báo lỗi");
+                }
+            }
+            else if (rdtkhocky.Checked)
+            {
+                try
+                {
+                    SqlConnection URL = new SqlConnection(link);
+                    URL.Open();
+                    string sql = "select L.MALOP, L.SL,\n" +
+                                 "[Dat] = (select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2,\n" +
+                                 "[TL] = convert(varchar(50),((select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2) / convert(float,L.SL)*100) + '%'\n" +
+                                 "from LOP L, DIEMHOCKY D, CTLOP C\n" +
+                                 "where L.MALOP = D.MALOP and D.MAHS = C.MAHS and C.MALOP like '%" + cblop1.SelectedValue.ToString() + "%'\n" +
+                                 "group by L.MALOP, L.SL";
+                    SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
+                    SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
+                    DataTable table = new DataTable();
+                    com.Fill(table);
+                    DataGV.DataSource = table;
+                }
+                catch
+                {
+                    MessageBox.Show("Hiện không có dữ liệu!!!", "Thông báo lỗi");
+                }
+            }
+            else
+                MessageBox.Show("Bạn phải chọn tổng kết học kỳ hoặc tổng kết môn", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        // ===============hàm ẩn button nếu không click checkbox trong báo cáo tổng kết================
+        private void rdtkmon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdtkmon.Checked)
+            {
+                cblop1.Enabled = false;
+                cblop.Enabled = true;
+                cbmon.Enabled = true;
+
+            }
+            else
+            {
+                cblop.Enabled = false;
+                cbmon.Enabled = false;
+                cblop1.Enabled = true;
+            }
+
+        }
+
+        private void buttonX2_Click(object sender, EventArgs e)
+        {
+            loadBCTKmon();
+        }
+
+
+        private void loadtabTK()
+        {
+            loadcbloptk();
+            loadcbmontk();
+            loadcbmontk1();
+        }
+
+        //=============================================================
 
         //============MainTheme Load===================
         private void MainTheme_Load(object sender, EventArgs e)
@@ -1575,11 +1703,14 @@ namespace QL_HS
             loadTabTuoi();
             Nhapdiemmonhoc();
             loadTabBdm();
+            loadtabTK();
         }
 
         private void buttonItem2_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+
     }
 }
