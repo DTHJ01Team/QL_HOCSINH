@@ -50,7 +50,7 @@ namespace QL_HS
         //    int index = tabMain.SelectedTabIndex;
         //    for (int i = tabMain.Tabs.Count - 1; i >= 0; i--)
         //        if (index != i)
-                    
+
         //    tabMain.Refresh();
         //}
 
@@ -65,7 +65,7 @@ namespace QL_HS
         //===========================================================================
 
         //================Thực hiện chức năng cho tab tiếp nhận sinh viên=============
-         string link = @"Data Source=DESKTOP-LVM1F93;User ID=sa;Password=123456;Initial Catalog=QL_HOCSINH";
+        string link = @"Data Source=DESKTOP-GH4LE4S\SQLEXPRESS;User ID=thai;Password=123;Initial Catalog=QL_HOCSINH";
 
         private void KNThemHS()
         {
@@ -166,8 +166,8 @@ namespace QL_HS
                     s = "Nữ";
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sua = "set dateformat dmy UPDATE HOCSINH SET HoTen=N'"+txtTen.Text+"', NgaySinh='"+txtdate.Text+"', GioiTinh=N'"+s+"', Email='"+txtEmail.Text+"', DiaChi=N'"+txtDiaChi.Text+"' WHERE MAHS='"+txtMS.Text+"'";
-                SqlCommand command = new SqlCommand(sua,URL);
+                string sua = "set dateformat dmy UPDATE HOCSINH SET HoTen=N'" + txtTen.Text + "', NgaySinh='" + txtdate.Text + "', GioiTinh=N'" + s + "', Email='" + txtEmail.Text + "', DiaChi=N'" + txtDiaChi.Text + "' WHERE MAHS='" + txtMS.Text + "'";
+                SqlCommand command = new SqlCommand(sua, URL);
                 command.ExecuteNonQuery();
                 KNThemHS();
             }
@@ -297,7 +297,7 @@ namespace QL_HS
         //===========Thực hiện chức năng liên kết from cho 3 tab trong tab lập DS lớp====
         private void btnAdd10_Click(object sender, EventArgs e)
         {
-            if ((dataTab10.Rows.Count-1) < int.Parse(txtSS10.Text))
+            if ((dataTab10.Rows.Count - 1) < int.Parse(txtSS10.Text))
             {
                 AddHS10 frm = new AddHS10();
                 frm.Show();
@@ -350,8 +350,8 @@ namespace QL_HS
             URL.Open();
             string load = "select * from LOP where MALOP like '%" + cb10.SelectedValue.ToString() + "%'";
             SqlCommand commandSql = new SqlCommand(load, URL); // Thực thi câu lệnh SQL
-            SqlDataReader com = commandSql.ExecuteReader() ;
-            if(com.Read())
+            SqlDataReader com = commandSql.ExecuteReader();
+            if (com.Read())
                 txtSS10.Text = com["SL"].ToString();
             URL.Close();
         }
@@ -557,9 +557,9 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select H.HoTen, L.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK1'), [HK2] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK2')\n"+
-                                    "from LOP L, DIEMHOCKY D, HOCSINH H\n"+
-                                    "where L.MALOP = D.MALOP and D.MAHS = H.MAHS\n"+
+                string sql = "select H.HoTen, L.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK1'), [HK2] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK2')\n" +
+                                    "from LOP L, DIEMHOCKY D, HOCSINH H\n" +
+                                    "where L.MALOP = D.MALOP and D.MAHS = H.MAHS\n" +
                                     "group by H.HoTen, L.MALOP";
                 SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
@@ -652,7 +652,7 @@ namespace QL_HS
         private void btnMonAdd_Click(object sender, EventArgs e)
         {
             int GH = int.Parse(txtSLMon.Text);
-            int SD = (dataMon.Rows.Count -1);
+            int SD = (dataMon.Rows.Count - 1);
             if (SD < GH)
             {
                 ThemMon();
@@ -772,7 +772,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sua = "UPDATE DIEMDATMON SET DiemDat='"+txtDiemmon.Text+"' FROM MONHOC WHERE DIEMDATMON.MAMH = MONHOC.MAMH and MONHOC.Ten like N'"+cbDiemmon.SelectedValue.ToString()+"'";
+                string sua = "UPDATE DIEMDATMON SET DiemDat='" + txtDiemmon.Text + "' FROM MONHOC WHERE DIEMDATMON.MAMH = MONHOC.MAMH and MONHOC.Ten like N'" + cbDiemmon.SelectedValue.ToString() + "'";
                 SqlCommand command = new SqlCommand(sua, URL);
                 command.ExecuteNonQuery();
             }
@@ -813,7 +813,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sua = "UPDATE QUYDINH SET GiaTriQD = '"+txtDiemTK.Text+"' WHERE MAQD like 'DIDA'";
+                string sua = "UPDATE QUYDINH SET GiaTriQD = '" + txtDiemTK.Text + "' WHERE MAQD like 'DIDA'";
                 SqlCommand command = new SqlCommand(sua, URL);
                 command.ExecuteNonQuery();
             }
@@ -902,14 +902,14 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string s ="";
-                if(rbtKhoi10.Checked == true)
+                string s = "";
+                if (rbtKhoi10.Checked == true)
                     s = "K10";
                 else if (rbtKhoi11.Checked == true)
                     s = "K11";
                 else
                     s = "K12";
-                string them = "INSERT INTO LOP VALUES('" + txtSSMa.Text + "','" + txtSSSL.Text + "','"+s+"')";
+                string them = "INSERT INTO LOP VALUES('" + txtSSMa.Text + "','" + txtSSSL.Text + "','" + s + "')";
                 SqlCommand command = new SqlCommand(them, URL);
                 command.ExecuteNonQuery();
                 loadDataSSLop();
@@ -950,7 +950,7 @@ namespace QL_HS
                     s = "K11";
                 else
                     s = "K12";
-                string sua = "UPDATE LOP SET SL='" + txtSSSL.Text + "', MAKHOI='"+s+"' WHERE MALOP='" + txtSSMa.Text + "'";
+                string sua = "UPDATE LOP SET SL='" + txtSSSL.Text + "', MAKHOI='" + s + "' WHERE MALOP='" + txtSSMa.Text + "'";
                 SqlCommand command = new SqlCommand(sua, URL);
                 command.ExecuteNonQuery();
                 loadDataSSLop();
@@ -1033,7 +1033,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sua = "UPDATE QUYDINH SET GiaTriQD='"+txtTuoiMin.Text+"' WHERE MAQD like 'TMIN'";
+                string sua = "UPDATE QUYDINH SET GiaTriQD='" + txtTuoiMin.Text + "' WHERE MAQD like 'TMIN'";
                 SqlCommand command = new SqlCommand(sua, URL);
                 command.ExecuteNonQuery();
             }
@@ -1053,7 +1053,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sua = "UPDATE QUYDINH SET GiaTriQD='"+txtTuoiMax.Text+"' WHERE MAQD like 'TMAX'";
+                string sua = "UPDATE QUYDINH SET GiaTriQD='" + txtTuoiMax.Text + "' WHERE MAQD like 'TMAX'";
                 SqlCommand command = new SqlCommand(sua, URL);
                 command.ExecuteNonQuery();
             }
@@ -1070,7 +1070,7 @@ namespace QL_HS
 
         private void btnTuoiSua_Click(object sender, EventArgs e)
         {
-            if (txtTuoiMin.Text.Length != 0 && txtTuoiMax.Text.Length !=0)
+            if (txtTuoiMin.Text.Length != 0 && txtTuoiMax.Text.Length != 0)
             {
                 TuoiMinSave();
                 TuoiMaxSave();
@@ -1103,9 +1103,9 @@ namespace QL_HS
         private void loadMSSV()
         {
             SqlConnection URL = new SqlConnection(link);
-            URL.Open();         
+            URL.Open();
             string sql2 = "select MAMH from MONHOC";
-            string sql3 = "select MAHS from HOCSINH";                 
+            string sql3 = "select MAHS from HOCSINH";
             SqlDataAdapter ad2 = new SqlDataAdapter(sql2, URL);
             DataTable dt2 = new DataTable();
             ad2.Fill(dt2);
@@ -1121,27 +1121,48 @@ namespace QL_HS
 
         private void loadtabndmh()
         {
-           
-            SqlConnection sql = new SqlConnection(link);
-            sql.Open();
-            string loadtenn = "select * from HOCSINH where MAHS like '%" + cbndMahocsinh.SelectedValue.ToString() + "%'";
-            SqlCommand commandsql = new SqlCommand(loadtenn, sql);
-            SqlDataReader chim = commandsql.ExecuteReader();
-            if(chim.Read())           
-                txtndHoten.Text = chim["HoTen"].ToString();            
-            sql.Close();  
+            try
+            {
+                SqlConnection sql = new SqlConnection(link);
+                sql.Open();
+                string loadtenn = "select * from HOCSINH where MAHS like '%" + cbndMahocsinh.SelectedValue.ToString() + "%'";
+                SqlCommand commandsql = new SqlCommand(loadtenn, sql);
+                SqlDataReader chim = commandsql.ExecuteReader();
+                if (chim.Read())
+                    txtndHoten.Text = chim["HoTen"].ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Hiện chưa có dữ liệu !!!", "Thông báo lỗi !!!");
+            }
+            finally
+            {
+                SqlConnection sql = new SqlConnection(link);
+                sql.Close();
+            }
         }
 
         private void loadtabtxtlop()
         {
-            SqlConnection sql = new SqlConnection(link);
-            sql.Open();
-            string loadten = "select * FROM CTLOP WHERE MAHS LIKE '%" + cbndMahocsinh.SelectedValue.ToString() + "%'";
-            SqlCommand commandsqll = new SqlCommand(loadten, sql);
-            SqlDataReader comm = commandsqll.ExecuteReader();
-            if (comm.Read())
-                txtndLop.Text = comm["MALOP"].ToString();
-            sql.Close();
+            try
+            {
+                SqlConnection sql = new SqlConnection(link);
+                sql.Open();
+                string loadten = "select * FROM CTLOP WHERE MAHS LIKE '%" + cbndMahocsinh.SelectedValue.ToString() + "%'";
+                SqlCommand commandsqll = new SqlCommand(loadten, sql);
+                SqlDataReader comm = commandsqll.ExecuteReader();
+                if (comm.Read())
+                    txtndLop.Text = comm["MALOP"].ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Hiện chưa có dữ liệu !!!", "Thông báo lỗi !!!");
+            }
+            finally
+            {
+                SqlConnection sql = new SqlConnection(link);
+                sql.Close();
+            }
         }
 
         private void loadtablablelop()
@@ -1155,13 +1176,13 @@ namespace QL_HS
                 txtndTenmon.Text = comm["Ten"].ToString();
             sql.Close();
         }
-     
+
         private void loadData()
         {
             try
             {
                 SqlConnection URL = new SqlConnection(link);
-                URL.Open();             
+                URL.Open();
                 string sql = "select h.MAHS, h.HoTen, d.MAHK, m.MAMH, d.[15P], d.[45P], DTBM = CONVERT(decimal(5,2),D.DTBM) from HOCSINH H, DIEMKIEMTRA D, MONHOC M where h.MAHS = d.MAHS and D.MAMH = m.MAMH";
                 SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
@@ -1191,7 +1212,7 @@ namespace QL_HS
             loadtablablelop();
         }
         //Viet ham update DTB
-        private void DTB_Update ()
+        private void DTB_Update()
         {
             try
             {
@@ -1216,8 +1237,8 @@ namespace QL_HS
         //Viet ham insert
         private void btndThem_Click(object sender, EventArgs e)
         {
-           try
-           {
+            try
+            {
                 string HK = "";
                 if (rbndHKI.Checked == true)
                     HK = "HK1";
@@ -1225,23 +1246,23 @@ namespace QL_HS
                     HK = "HK2";
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string insert = "INSERT INTO DIEMKIEMTRA VALUES('"+cbndMahocsinh.SelectedValue.ToString() +"','" + cbndMamon.SelectedValue.ToString() + "','" + HK + "','" + txtndDiem15.Text + "','" + txtndDiem45.Text + "',0)";
+                string insert = "INSERT INTO DIEMKIEMTRA VALUES('" + cbndMahocsinh.SelectedValue.ToString() + "','" + cbndMamon.SelectedValue.ToString() + "','" + HK + "','" + txtndDiem15.Text + "','" + txtndDiem45.Text + "',0)";
                 SqlCommand command = new SqlCommand(insert, URL);
                 command.ExecuteNonQuery();
                 DTB_Update();
                 loadData();
-           }
-           catch
-           {
+            }
+            catch
+            {
 
                 MessageBox.Show("Thêm không thành công", "Thông báo lỗi");
 
-           }
-           finally
-           {
-               SqlConnection URL = new SqlConnection(link);
-               URL.Close();
-           }
+            }
+            finally
+            {
+                SqlConnection URL = new SqlConnection(link);
+                URL.Close();
+            }
         }
 
         //Viet ham Edit
@@ -1256,7 +1277,7 @@ namespace QL_HS
                     HK = "HK2";
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sua = "UPDATE DIEMKIEMTRA SET [15P]='"+txtndDiem15.Text+"', [45P] = '"+txtndDiem45.Text+"' WHERE MAHS='"+cbndMahocsinh.SelectedValue.ToString()+"' and MAMH ='"+cbndMamon.SelectedValue.ToString()+"' and MAHK='"+HK+"'";
+                string sua = "UPDATE DIEMKIEMTRA SET [15P]='" + txtndDiem15.Text + "', [45P] = '" + txtndDiem45.Text + "' WHERE MAHS='" + cbndMahocsinh.SelectedValue.ToString() + "' and MAMH ='" + cbndMamon.SelectedValue.ToString() + "' and MAHK='" + HK + "'";
                 SqlCommand command = new SqlCommand(sua, URL);
                 command.ExecuteNonQuery();
                 DTB_Update();
@@ -1264,7 +1285,7 @@ namespace QL_HS
             }
             catch
             {
-                MessageBox.Show("Sửa không thành công!","Thông báo lỗi");
+                MessageBox.Show("Sửa không thành công!", "Thông báo lỗi");
             }
             finally
             {
@@ -1285,14 +1306,14 @@ namespace QL_HS
                     HK = "HK1";
                 else
                     HK = "HK2";
-                string xoa = "DELETE FROM DIEMKIEMTRA WHERE MAHS='"+cbndMahocsinh.SelectedValue.ToString()+"' and MAMH='"+cbndMamon.SelectedValue.ToString()+"' and MAHK='"+HK+"'";
+                string xoa = "DELETE FROM DIEMKIEMTRA WHERE MAHS='" + cbndMahocsinh.SelectedValue.ToString() + "' and MAMH='" + cbndMamon.SelectedValue.ToString() + "' and MAHK='" + HK + "'";
                 SqlCommand command = new SqlCommand(xoa, URL);
                 command.ExecuteNonQuery();
                 loadData();
             }
             catch
             {
-                MessageBox.Show("Xóa không thành công!","Thông báo lỗi");
+                MessageBox.Show("Xóa không thành công!", "Thông báo lỗi");
             }
             finally
             {
@@ -1316,7 +1337,7 @@ namespace QL_HS
         {
             int index = dataGridViewNhapdiem.CurrentRow.Index;
             cbndMahocsinh.SelectedValue = dataGridViewNhapdiem.Rows[index].Cells[0].Value.ToString();
-            txtndHoten.Text = dataGridViewNhapdiem.Rows[index].Cells[1].Value.ToString();          
+            txtndHoten.Text = dataGridViewNhapdiem.Rows[index].Cells[1].Value.ToString();
             if (dataGridViewNhapdiem.Rows[index].Cells[2].Value.ToString().Equals("HK1"))
                 rbndHKI.Checked = true;
             else
@@ -1352,6 +1373,193 @@ namespace QL_HS
             DTB_Update();
         }
         //=============================================================
+        //===========Thực hiện chức năng Tab Tính điểm học kỳ==================
+        private void loadcb()
+        {
+            SqlConnection ma = new SqlConnection(link);
+            ma.Open();
+            string load1 = "SELECT * from HOCSINH";
+            SqlCommand commandSql1 = new SqlCommand(load1, ma); // Thực thi câu lệnh SQL
+            SqlDataAdapter com1 = new SqlDataAdapter(commandSql1); //Vận chuyển dữ liệu
+            DataTable table1 = new DataTable();
+            com1.Fill(table1);
+            cbMHS.DataSource = table1;
+            cbMHS.ValueMember = "MAHS";
+            ma.Close();
+        }
+
+        private void loadlop()
+        {
+            try
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Open();
+                string load = "SELECT * from CTLOP where MAHS = '" + cbMHS.SelectedValue.ToString() + "'";
+                SqlCommand commandSql = new SqlCommand(load, ma); // Thực thi câu lệnh SQL
+                SqlDataReader com = commandSql.ExecuteReader(); //Vận chuyển dữ liệu
+                if (com.Read())
+                    txtLop.Text = com["MALOP"].ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Hiện chưa có dữ liệu!!!", "Thông báo lỗi!!!");
+            }
+            finally
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Close();
+            }
+        }
+        private void loadmahs()
+        {
+            try
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Open();
+                string load = "Select * from HOCSINH where MAHS like '%" + cbMHS.SelectedValue.ToString() + "%'";
+                SqlCommand commandSql = new SqlCommand(load, ma); // Thực thi câu lệnh SQL
+                SqlDataReader com = commandSql.ExecuteReader();
+                if (com.Read())
+                    txtHoten.Text = com["HoTen"].ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Hiện chưa có dữ liệu!!!", "Thông báo lỗi!!!");
+            }
+            finally
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Close();
+            }
+        }
+
+        private void cbMHS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadmahs();
+            loadlop();
+        }
+
+        private void loadbdm()
+        {
+            try
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Open();
+                string sql = "select H.MAHS , H.HoTen, D.MALOP, D.MAHK, DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS";
+                SqlCommand commandSql = new SqlCommand(sql, ma); // Thực thi câu lệnh SQL
+                SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
+                DataTable table = new DataTable();
+                com.Fill(table);
+                dataBdm.DataSource = table;
+            }
+            catch
+            {
+                MessageBox.Show("Kết nối không thành công! Vui lòng kết nối lại!");
+            }
+            finally
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Close();
+            }
+        }
+
+        private void Update_DTBHK()
+        {
+            try
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Open();
+                string sua = "update DIEMHOCKY set DTBHK = (select CONVERT(decimal(5,2),sum(DTBM)/count(MAHS)) from DIEMKIEMTRA D where D.MAHS = DIEMHOCKY.MAHS and D.MAHK = DIEMHOCKY.MAHK group by MAHS, MAHK)";
+                SqlCommand command = new SqlCommand(sua, ma);
+                command.ExecuteNonQuery();
+                loadbdm();
+            }
+            catch
+            {
+                MessageBox.Show("Sửa không thành công!!!");
+            }
+            finally
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Close();
+            }
+        }
+
+        private void cbThembdm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                SqlConnection ma = new SqlConnection(link);
+                ma.Open();
+                string hk = "";
+                if (rbTDHK1.Checked == true)
+                    hk = "HK1";
+                else
+                    hk = "HK2";
+                string them = "INSERT INTO DIEMHOCKY VALUES(' " + cbMHS.SelectedValue.ToString() + "',' " + txtLop.Text + " ','" + hk + "')";
+                SqlCommand command = new SqlCommand(them, ma);
+                command.ExecuteNonQuery();
+                Update_DTBHK();
+                loadbdm();
+            }
+            catch
+            {
+                MessageBox.Show("Thêm không thành công!!!");
+            }
+            finally
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Close();
+            }
+        }
+
+
+        private void cbXoabdm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Open();
+                string hk = "";
+                if (rbTDHK1.Checked == true)
+                    hk = "HK1";
+                else
+                    hk = "HK2";
+                string xoa = "DELETE FROM DIEMHOCKY WHERE MAHS='" + cbMHS.SelectedValue.ToString() + "' and MALOP ='" + txtLop.Text + "' and MAHK= '" + hk + "'";
+                SqlCommand command = new SqlCommand(xoa, ma);
+                command.ExecuteNonQuery();
+                loadbdm();
+            }
+            catch
+            {
+                MessageBox.Show("Xóa không thành công!");
+            }
+            finally
+            {
+                SqlConnection ma = new SqlConnection(link);
+                ma.Close();
+            }
+        }
+
+        private void dataBdm_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = dataBdm.CurrentRow.Index;
+            cbMHS.SelectedValue = dataBdm.Rows[index].Cells[0].Value.ToString();
+            txtLop.Text = dataBdm.Rows[index].Cells[2].Value.ToString();
+        }
+
+        private void loadTabBdm()
+        {
+
+            Update_DTBHK();
+            loadcb();
+            loadmahs();
+            loadbdm();
+            loadlop();
+        }
+        //=============================================================
+
         //============MainTheme Load===================
         private void MainTheme_Load(object sender, EventArgs e)
         {
@@ -1366,13 +1574,12 @@ namespace QL_HS
             loadTabSS();
             loadTabTuoi();
             Nhapdiemmonhoc();
+            loadTabBdm();
         }
 
         private void buttonItem2_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-       
     }
 }

@@ -18,7 +18,7 @@ namespace QL_HS
             InitializeComponent();
         }
 
-        string link = @"Data Source=DESKTOP-LVM1F93;User ID=sa;Password=123456;Initial Catalog=QL_HOCSINH";
+        string link = @"Data Source=DESKTOP-GH4LE4S\SQLEXPRESS;User ID=thai;Password=123;Initial Catalog=QL_HOCSINH";
 
         private void LoadCB()
         {
