@@ -48,3 +48,18 @@ C:\Users\HUYNH MINH\Desktop\QWE\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Deb
 C:\Users\HUYNH MINH\Desktop\QWE\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.csproj.GenerateResource.Cache
 C:\Users\HUYNH MINH\Desktop\QWE\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\bin\Debug\QL_HS.exe
 C:\Users\HUYNH MINH\Desktop\QWE\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\bin\Debug\QL_HS.pdb
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.exe
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.pdb
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\bin\Debug\QL_HS.exe
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\bin\Debug\QL_HS.pdb
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\bin\Debug\DevComponents.DotNetBar2.dll
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\bin\Debug\DevComponents.DotNetBar2.xml
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.csprojResolveAssemblyReference.cache
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.AddHS10.resources
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.AddHS11.resources
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.AddHS12.resources
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.MainTheme.resources
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.Properties.Resources.resources
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.SLMonHoc.resources
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.csproj.GenerateResource.Cache
+C:\Users\AnhQuoc\Desktop\QL_HOCSINH-master\QL_HOCSINH-master\QL_HOCSINH\QL_HS\QL_HS\obj\Debug\QL_HS.Login.resources

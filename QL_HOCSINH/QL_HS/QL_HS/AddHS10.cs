@@ -18,7 +18,7 @@ namespace QL_HS
             InitializeComponent();
         }
 
-        string link = @"Data Source=HUYNHMINH-PC\SQLEXPRESS;Initial Catalog=QL_HOCSINH;Persist Security Info=True;User ID=sa;Password=123";
+        string link = @"Data Source=ANHQUOC-PC\ANHQUOC;User ID=anhquoc;Password=123;Initial Catalog=QL_HOCSINH";
         private void LoadCB()
         {
             SqlConnection URL = new SqlConnection(link);

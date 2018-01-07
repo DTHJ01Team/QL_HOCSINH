@@ -65,7 +65,7 @@ namespace QL_HS
         //===========================================================================
 
         //================Thực hiện chức năng cho tab tiếp nhận sinh viên=============
-        string link = @"Data Source=HUYNHMINH-PC\SQLEXPRESS;Initial Catalog=QL_HOCSINH;Persist Security Info=True;User ID=sa;Password=123";
+        string link = @"Data Source=ANHQUOC-PC\ANHQUOC;User ID=anhquoc;Password=123;Initial Catalog=QL_HOCSINH";
 
         private void KNThemHS()
         {
@@ -229,18 +229,23 @@ namespace QL_HS
         //===========Thực hiện chức năng mở các tab===========================
         private void btnThemHS_Click(object sender, EventArgs e)
         {
+            KNThemHS();
             tabThemHS.Visible = true;
             tabMain.SelectedTab = tabThemHS;
         }
 
         private void btnLapDS_Click(object sender, EventArgs e)
         {
+            LoadTab10();
+            LoadTab11();
+            LoadTab12();
             tabLapDS.Visible = true;
             tabMain.SelectedTab = tabLapDS;
         }
 
         private void btnTra_Click(object sender, EventArgs e)
         {
+            loadTabTC();
             tabTra.Visible = true;
             tabMain.SelectedTab = tabTra;
         }
@@ -253,42 +258,49 @@ namespace QL_HS
 
         private void btnNhapDiem_Click(object sender, EventArgs e)
         {
+            Nhapdiemmonhoc();
             tabNhapDiem.Visible = true;
             tabMain.SelectedTab = tabNhapDiem;
         }
 
         private void btnTinhDiem_Click(object sender, EventArgs e)
         {
+            loadTabBdm();
             tabTinhTB.Visible = true;
             tabMain.SelectedTab = tabTinhTB;
         }
 
         private void btnBCTK_Click(object sender, EventArgs e)
         {
+            loadtabTK();
             tabBCTK.Visible = true;
             tabMain.SelectedTab = tabBCTK;
         }
 
         private void btnMon_Click(object sender, EventArgs e)
         {
+            loadTabMon();
             tabMon.Visible = true;
             tabMain.SelectedTab = tabMon;
         }
 
         private void btnDiem_Click(object sender, EventArgs e)
         {
+            loadTabDiem();
             tabDiem.Visible = true;
             tabMain.SelectedTab = tabDiem;
         }
 
         private void btnSS_Click(object sender, EventArgs e)
         {
+            loadTabSS();
             tabSS.Visible = true;
             tabMain.SelectedTab = tabSS;
         }
 
         private void btnTuoi_Click(object sender, EventArgs e)
         {
+            loadTabTuoi();
             tabTuoi.Visible = true;
             tabMain.SelectedTab = tabTuoi;
         }
@@ -1659,16 +1671,14 @@ namespace QL_HS
         {
             if (rdtkmon.Checked)
             {
-                cblop1.Enabled = false;
-                cblop.Enabled = true;
-                cbmon.Enabled = true;
 
+                groupBox1.Enabled = true;
+                groupBox2.Enabled = false;
             }
             else
             {
-                cblop.Enabled = false;
-                cbmon.Enabled = false;
-                cblop1.Enabled = true;
+                groupBox1.Enabled = false;
+                groupBox2.Enabled = true;
             }
 
         }
@@ -1681,6 +1691,7 @@ namespace QL_HS
 
         private void loadtabTK()
         {
+            groupBox2.Enabled = false;
             loadcbloptk();
             loadcbmontk();
             loadcbmontk1();
@@ -1689,10 +1700,14 @@ namespace QL_HS
         //=============================================================
 
         //============MainTheme Load===================
-        private void MainTheme_Load(object sender, EventArgs e)
+        private void buttonItem2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnMainRef_Click(object sender, EventArgs e)
         {
             KNThemHS();
-            clock.AutomaticMode = true;
             LoadTab10();
             LoadTab11();
             LoadTab12();
@@ -1705,12 +1720,15 @@ namespace QL_HS
             loadTabBdm();
             loadtabTK();
         }
-
-        private void buttonItem2_Click(object sender, EventArgs e)
+        private void MainTheme_Load(object sender, EventArgs e)
         {
-            Close();
+            clock.AutomaticMode = true;
+           
         }
 
-
+        private void MainTheme_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
