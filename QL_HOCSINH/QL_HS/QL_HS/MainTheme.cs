@@ -1509,13 +1509,13 @@ namespace QL_HS
                     hk = "HK1";
                 else
                     hk = "HK2";
-                string them = "INSERT INTO DIEMHOCKY VALUES(' " + cbMHS.SelectedValue.ToString() + "',' " + txtLop.Text + " ','" + hk + "')";
+                string them = "INSERT INTO DIEMHOCKY VALUES('" + cbMHS.SelectedValue.ToString() + "',' " + txtLop.Text + " ','" + hk + "','0')";
                 SqlCommand command = new SqlCommand(them, ma);
                 command.ExecuteNonQuery();
                 Update_DTBHK();
                 loadbdm();
             }
-            catch
+            catch 
             {
                 MessageBox.Show("Thêm không thành công!!!");
             }
@@ -1595,7 +1595,19 @@ namespace QL_HS
             DataTable t = new DataTable();
             com.Fill(t);
             cbmon.DataSource = t;
-            cbmon.ValueMember = "TEN";
+            cbmon.ValueMember = "MAMH";
+            URL.Close();
+        }
+
+        private void loadTKTenMon ()
+        {
+            SqlConnection URL = new SqlConnection(link);
+            URL.Open();
+            string load = "SELECT * from MONHOC where MAMH like '"+cbmon.SelectedValue.ToString()+"'";
+            SqlCommand commandSql = new SqlCommand(load, URL);
+            SqlDataReader r = commandSql.ExecuteReader();
+            if (r.Read())
+                txtTKTenMon.Text = r["Ten"].ToString();
             URL.Close();
         }
         private void loadcbmontk1()
@@ -1616,7 +1628,7 @@ namespace QL_HS
         private void loadBCTKmon()
         {
 
-            if (rdtkmon.Checked)
+            if (rdtkmon.Checked == true)
             {
                 try
                 {
@@ -1639,19 +1651,24 @@ namespace QL_HS
                 {
                     MessageBox.Show("Hiện không có dữ liệu!!!", "Thông báo lỗi");
                 }
+                finally
+                {
+                    SqlConnection URL = new SqlConnection(link);
+                    URL.Close();
+                }
             }
-            else if (rdtkhocky.Checked)
+            else 
             {
                 try
                 {
                     SqlConnection URL = new SqlConnection(link);
                     URL.Open();
                     string sql = "select L.MALOP, L.SL,\n" +
-                                 "[Dat] = (select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2,\n" +
-                                 "[TL] = convert(varchar(50),((select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2) / convert(float,L.SL)*100) + '%'\n" +
-                                 "from LOP L, DIEMHOCKY D, CTLOP C\n" +
-                                 "where L.MALOP = D.MALOP and D.MAHS = C.MAHS and C.MALOP like '%" + cblop1.SelectedValue.ToString() + "%'\n" +
-                                 "group by L.MALOP, L.SL";
+                                    "[Dat] = (select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2,\n" +
+                                    "[TL] = convert(varchar(50),((select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2) / convert(float,L.SL)*100) + '%'\n" +
+                                    "from LOP L, DIEMHOCKY D, CTLOP C\n" +
+                                    "where L.MALOP = D.MALOP and D.MAHS = C.MAHS and C.MALOP like '%" + cblop1.SelectedValue.ToString() + "%'\n" +
+                                    "group by L.MALOP, L.SL";
                     SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                     SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
                     DataTable table = new DataTable();
@@ -1662,9 +1679,12 @@ namespace QL_HS
                 {
                     MessageBox.Show("Hiện không có dữ liệu!!!", "Thông báo lỗi");
                 }
+                finally
+                {
+                    SqlConnection URL = new SqlConnection(link);
+                    URL.Close();
+                }
             }
-            else
-                MessageBox.Show("Bạn phải chọn tổng kết học kỳ hoặc tổng kết môn", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         // ===============hàm ẩn button nếu không click checkbox trong báo cáo tổng kết================
         private void rdtkmon_CheckedChanged(object sender, EventArgs e)
@@ -1683,6 +1703,10 @@ namespace QL_HS
 
         }
 
+        private void cbmon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadTKTenMon();
+        }
         private void buttonX2_Click(object sender, EventArgs e)
         {
             loadBCTKmon();
@@ -1695,6 +1719,7 @@ namespace QL_HS
             loadcbloptk();
             loadcbmontk();
             loadcbmontk1();
+            loadTKTenMon();
         }
 
         //=============================================================
