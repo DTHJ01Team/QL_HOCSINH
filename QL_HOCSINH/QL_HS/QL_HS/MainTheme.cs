@@ -380,7 +380,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select h.HoTen, h.GioiTinh, h.NgaySinh,h.DiaChi from LOP L, CTLOP C, HOCSINH H where l.MALOP = c.MALOP and c.MAHS = h.MAHS and c.MALOP like '%" + cb10.SelectedValue.ToString() + "%'";
+                string sql = "select [Tên]=h.HoTen, [Giới tính]=h.GioiTinh, [Ngày sinh]=h.NgaySinh,[Địa chỉ]=h.DiaChi from LOP L, CTLOP C, HOCSINH H where l.MALOP = c.MALOP and c.MAHS = h.MAHS and c.MALOP like '%" + cb10.SelectedValue.ToString() + "%'";
                 SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
                 DataTable table = new DataTable();
@@ -445,7 +445,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select h.HoTen, h.GioiTinh, h.NgaySinh,h.DiaChi from LOP L, CTLOP C, HOCSINH H where l.MALOP = c.MALOP and c.MAHS = h.MAHS and c.MALOP like '%" + cb11.SelectedValue.ToString() + "%'";
+                string sql = "select [Tên]=h.HoTen, [Giới tính]=h.GioiTinh, [Ngày sinh]=h.NgaySinh,[Địa chỉ]=h.DiaChi from LOP L, CTLOP C, HOCSINH H where l.MALOP = c.MALOP and c.MAHS = h.MAHS and c.MALOP like '%" + cb11.SelectedValue.ToString() + "%'";
                 SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
                 DataTable table = new DataTable();
@@ -509,7 +509,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select h.HoTen, h.GioiTinh, h.NgaySinh,h.DiaChi from LOP L, CTLOP C, HOCSINH H where l.MALOP = c.MALOP and c.MAHS = h.MAHS and c.MALOP like '%" + cb12.SelectedValue.ToString() + "%'";
+                string sql = "select [Tên]=h.HoTen, [Giới tính]=h.GioiTinh, [Ngày sinh]=h.NgaySinh, [Địa chỉ]=h.DiaChi from LOP L, CTLOP C, HOCSINH H where l.MALOP = c.MALOP and c.MAHS = h.MAHS and c.MALOP like '%" + cb12.SelectedValue.ToString() + "%'";
                 SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
                 DataTable table = new DataTable();
@@ -542,7 +542,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select H.HoTen, D.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and H.HoTen like N'" +txtHTTC.Text+ "%' and MAHK like 'HK1'),\n"+
+                string sql = "select [Tên]=H.HoTen, [Lớp]=D.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and H.HoTen like N'" +txtHTTC.Text+ "%' and MAHK like 'HK1'),\n"+
                                 "[HK2] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and H.HoTen like N'" + txtHTTC.Text + "%' and MAHK like 'HK2')\n" +
                                 "FROM HOCSINH H, DIEMHOCKY D\n"+
                                 "where H.MAHS = D.MAHS and H.HoTen like N'" + txtHTTC.Text + "%'\n" +
@@ -555,7 +555,7 @@ namespace QL_HS
             }
             catch(SqlException ex)
             {
-                MessageBox.Show(ex.Errors.ToString());
+                MessageBox.Show("Xin điền đầy đủ họ tên!!!");
             }
             finally
             {
@@ -570,7 +570,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select H.HoTen, L.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK1'), [HK2] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK2')\n" +
+                string sql = "select [Tên]=H.HoTen, [Lớp]=L.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK1'), [HK2] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and MAHK like 'HK2')\n" +
                                     "from LOP L, DIEMHOCKY D, HOCSINH H\n" +
                                     "where L.MALOP = D.MALOP and D.MAHS = H.MAHS\n" +
                                     "group by H.HoTen, L.MALOP";
@@ -1201,7 +1201,7 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select h.MAHS, h.HoTen, d.MAHK, m.MAMH, d.[15P], d.[45P], DTBM = CONVERT(decimal(5,2),D.DTBM) from HOCSINH H, DIEMKIEMTRA D, MONHOC M where h.MAHS = d.MAHS and D.MAMH = m.MAMH";
+                string sql = "select [Mã học sinh]=h.MAHS, [Tên]=h.HoTen, [Học kì]=d.MAHK, [Môn]=m.MAMH, d.[15P], d.[45P], [Điểm TB] = CONVERT(decimal(5,2),D.DTBM) from HOCSINH H, DIEMKIEMTRA D, MONHOC M where h.MAHS = d.MAHS and D.MAMH = m.MAMH";
                 SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
                 DataTable table = new DataTable();
@@ -1463,7 +1463,7 @@ namespace QL_HS
             {
                 SqlConnection ma = new SqlConnection(link);
                 ma.Open();
-                string sql = "select H.MAHS , H.HoTen, D.MALOP, D.MAHK, DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS";
+                string sql = "select [Mã học sinh] = H.MAHS ,[Tên]= H.HoTen,[Lớp]= D.MALOP,[Học kì]= D.MAHK, [Điểm TB]=DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS";
                 SqlCommand commandSql = new SqlCommand(sql, ma); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
                 DataTable table = new DataTable();
@@ -1640,9 +1640,9 @@ namespace QL_HS
                 {
                     SqlConnection URL = new SqlConnection(link);
                     URL.Open();
-                    string sql = "select L.MALOP, L.SL, \n" +
-                                 "[Dat] = (select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat  and D.MAMH like '%" + cbmon.SelectedValue.ToString() + "%' and C.MALOP like '%" + cblop.SelectedValue.ToString() + "%'),\n" +
-                                 "[TL] = convert(varchar(50),((select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat and D.MAMH like '%" + cbmon.SelectedValue.ToString() + "%' and C.MALOP like '%" + cblop.SelectedValue.ToString() + "%') / convert(float,L.SL)*100)) + '%'\n" +
+                    string sql = "select [Lớp] = L.MALOP, [Số lượng] = L.SL, \n" +
+                                 "[Đạt] = (select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat  and D.MAMH like '%" + cbmon.SelectedValue.ToString() + "%' and C.MALOP like '%" + cblop.SelectedValue.ToString() + "%'),\n" +
+                                 "[Tỉ lệ] = convert(varchar(50),((select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat and D.MAMH like '%" + cbmon.SelectedValue.ToString() + "%' and C.MALOP like '%" + cblop.SelectedValue.ToString() + "%') / convert(float,L.SL)*100)) + '%'\n" +
                                  "from LOP L, DIEMKIEMTRA D, CTLOP C\n" +
                                  "where L.MALOP = C.MALOP and C.MAHS = D.MAHS and C.MALOP like '%" +
                                  cblop.SelectedValue.ToString() +
@@ -1669,11 +1669,11 @@ namespace QL_HS
                 {
                     SqlConnection URL = new SqlConnection(link);
                     URL.Open();
-                    string sql = "select L.MALOP, L.SL,\n" +
-                                    "[Dat] = (select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2,\n" +
-                                    "[TL] = convert(varchar(50),((select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2) / convert(float,L.SL)*100) + '%'\n" +
-                                    "from LOP L, DIEMHOCKY D, CTLOP C\n" +
-                                    "where L.MALOP = D.MALOP and D.MAHS = C.MAHS and C.MALOP like '%" + cblop1.SelectedValue.ToString() + "%'\n" +
+                    string sql = "select [Lớp]=L.MALOP, [Số lượng]=L.SL,\n" +
+                                    "[Đạt] = (select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2,\n" +
+                                    "[Tỉ lệ] = convert(varchar(50),((select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%" + cblop1.SelectedValue.ToString() + "%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2) / convert(float,L.SL)*100) + '%'\n" +
+                                    "from LOP L\n" +
+                                    "where L.MALOP like '%" + cblop1.SelectedValue.ToString() + "%'\n" +
                                     "group by L.MALOP, L.SL";
                     SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                     SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu

@@ -61,7 +61,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataThem10.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataThem10.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -169,7 +169,7 @@
             // 
             this.btnThem10.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnThem10.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnThem10.Location = new System.Drawing.Point(44, 167);
+            this.btnThem10.Location = new System.Drawing.Point(36, 167);
             this.btnThem10.Name = "btnThem10";
             this.btnThem10.Size = new System.Drawing.Size(75, 23);
             this.btnThem10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -181,7 +181,7 @@
             // 
             this.btnSua10.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSua10.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSua10.Location = new System.Drawing.Point(148, 167);
+            this.btnSua10.Location = new System.Drawing.Point(149, 167);
             this.btnSua10.Name = "btnSua10";
             this.btnSua10.Size = new System.Drawing.Size(75, 23);
             this.btnSua10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -193,7 +193,7 @@
             // 
             this.btnXoa10.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnXoa10.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnXoa10.Location = new System.Drawing.Point(254, 167);
+            this.btnXoa10.Location = new System.Drawing.Point(262, 167);
             this.btnXoa10.Name = "btnXoa10";
             this.btnXoa10.Size = new System.Drawing.Size(75, 23);
             this.btnXoa10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
