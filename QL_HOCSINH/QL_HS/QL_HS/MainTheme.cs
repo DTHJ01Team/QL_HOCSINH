@@ -542,19 +542,20 @@ namespace QL_HS
             {
                 SqlConnection URL = new SqlConnection(link);
                 URL.Open();
-                string sql = "select H.HoTen, L.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and H.HoTen like N'%" + txtHTTC.Text + "%' and MAHK like 'HK1'), [HK2] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and H.HoTen like N'%" + txtHTTC.Text + "%' and MAHK like 'HK2')\n" +
-                                    "from LOP L, DIEMHOCKY D, HOCSINH H\n" +
-                                    "where L.MALOP = D.MALOP and D.MAHS = H.MAHS and H.HoTen like N'%" + txtHTTC.Text + "%'\n" +
-                                    "group by H.HoTen, L.MALOP";
+                string sql = "select H.HoTen, D.MALOP, [HK1] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and H.HoTen like N'" +txtHTTC.Text+ "%' and MAHK like 'HK1'),\n"+
+                                "[HK2] = (select DTBHK from DIEMHOCKY D, HOCSINH H where D.MAHS = H.MAHS and H.HoTen like N'" + txtHTTC.Text + "%' and MAHK like 'HK2')\n" +
+                                "FROM HOCSINH H, DIEMHOCKY D\n"+
+                                "where H.MAHS = D.MAHS and H.HoTen like N'" + txtHTTC.Text + "%'\n" +
+                                "group by H.HoTen, D.MALOP";
                 SqlCommand commandSql = new SqlCommand(sql, URL); // Thực thi câu lệnh SQL
                 SqlDataAdapter com = new SqlDataAdapter(commandSql); //Vận chuyển dữ liệu
                 DataTable table = new DataTable();
                 com.Fill(table);
                 dataTC.DataSource = table;
             }
-            catch
+            catch(SqlException ex)
             {
-                MessageBox.Show("Kết nối không thành công! Vui lòng kết nối lại!");
+                MessageBox.Show(ex.Errors.ToString());
             }
             finally
             {
@@ -593,12 +594,17 @@ namespace QL_HS
 
         private void txtHTTC_TextChanged(object sender, EventArgs e)
         {
+            //loadDataTC();
+        }
+
+        private void btnTC_Click(object sender, EventArgs e)
+        {
             loadDataTC();
         }
 
         private void loadTabTC()
         {
-            loadDataTCFirst();
+            //loadDataTCFirst();
         }
         //====================================================================
 
@@ -1755,5 +1761,7 @@ namespace QL_HS
         {
             Application.Exit();
         }
+
+        
     }
 }
